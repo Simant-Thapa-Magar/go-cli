@@ -29,6 +29,16 @@ func getVideos() (videos []video) {
 	return videos
 }
 
-func saveVideos(video []video) {
+func saveVideos(videos []video) {
+	videoBytes, err := json.Marshal(videos)
 
+	if err != nil {
+		panic(err)
+	}
+
+	err = ioutil.WriteFile("./videos.json", videoBytes, 0644)
+
+	if err != nil {
+		panic(err)
+	}
 }
