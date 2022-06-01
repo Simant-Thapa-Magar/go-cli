@@ -1,16 +1,1 @@
-[
-    {
-        "Id": "1",
-        "Title": "video 1",
-        "Description": "video description 1",
-        "PreviewUrl": "video 1 image url",
-        "Url": "video 1 url"
-    },
-    {
-        "Id": "2",
-        "Title": "video 2",
-        "Description": "video description 2",
-        "PreviewUrl": "video 2 image url",
-        "Url": "video 2 url"
-    }
-]
+[{"Id":"1","Title":"video 1","Description":"video description 1","PreviewUrl":"video 1 image url","Url":"video 1 url"},{"Id":"2","Title":"video 2","Description":"video description 2","PreviewUrl":"video 2 image url","Url":"video 2 url"},{"Id":"3","Title":"from cli","Description":"this video was saved from cli","PreviewUrl":"test purl","Url":"t url"}]
