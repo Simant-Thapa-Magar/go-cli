@@ -17,6 +17,25 @@ func main() {
 	// video by id
 	getId := getCmd.String("id", "", "Video ID")
 
+	// command for saving video
+	saveCmd := flag.NewFlagSet("save", flag.ExitOnError)
+
+	// input for save video command
+	// id
+	addId := saveCmd.String("id", "", "Video ID")
+
+	// title
+	addTitle := saveCmd.String("title", "", "Video Title")
+
+	// description
+	addDescription := saveCmd.String("description", "", "Video Description")
+
+	// preview url
+	addPreview := saveCmd.String("previewUrl", "", "Video Image URL")
+
+	// url
+	addUrl := saveCmd.String("url", "", "Video URL")
+
 	// command args validation
 	if len(os.Args) < 2 {
 		fmt.Println("expected 'get' or 'save' command")
@@ -30,6 +49,7 @@ func main() {
 		break
 	case "save":
 		// handle save command
+		handleSave(saveCmd, addId, addTitle, addDescription, addPreview, addUrl)
 		break
 	default:
 		fmt.Println("expected 'get' or 'save' command")
@@ -71,4 +91,51 @@ func handleGet(getCmd *flag.FlagSet, all *bool, id *string) {
 		}
 	}
 
+}
+
+func handleSave(saveCmd *flag.FlagSet, id *string, title *string, description *string, previewUrl *string, url *string) {
+	saveCmd.Parse(os.Args[2:])
+
+	if *id == "" {
+		fmt.Println("Provide video id for saving")
+		saveCmd.PrintDefaults()
+		os.Exit(1)
+	}
+
+	if *title == "" {
+		fmt.Println("Provide video title for saving")
+		saveCmd.PrintDefaults()
+		os.Exit(1)
+	}
+
+	if *description == "" {
+		fmt.Println("Provide video description for saving")
+		saveCmd.PrintDefaults()
+		os.Exit(1)
+	}
+
+	if *previewUrl == "" {
+		fmt.Println("Provide video preview url for saving")
+		saveCmd.PrintDefaults()
+		os.Exit(1)
+	}
+
+	if *url == "" {
+		fmt.Println("Provide video url for saving")
+		saveCmd.PrintDefaults()
+		os.Exit(1)
+	}
+
+	video := video{
+		Id:          *id,
+		Title:       *title,
+		Description: *description,
+		PreviewUrl:  *previewUrl,
+		Url:         *url,
+	}
+
+	videos := getVideos()
+	videos = append(videos, video)
+
+	saveVideos(videos)
 }
