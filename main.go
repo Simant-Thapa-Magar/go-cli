@@ -55,7 +55,20 @@ func handleGet(getCmd *flag.FlagSet, all *bool, id *string) {
 	}
 
 	if *id != "" {
+		videos := getVideos()
+		found := false
+		for _, video := range videos {
+			if video.Id == *id {
+				found = true
+				fmt.Println("Video ")
+				fmt.Printf("ID \tVIDEO TITLE \tIMAGE PREVIEW \tVIDEO URL \tVIDEO DESCRIPTION \n")
+				fmt.Printf("%s \t%s \t%s \t%s \t%s \n", video.Id, video.Title, video.PreviewUrl, video.Url, video.Description)
+			}
+		}
 
+		if !found {
+			fmt.Println("No video found with id ", *id)
+		}
 	}
 
 }
