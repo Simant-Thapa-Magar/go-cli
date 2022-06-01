@@ -30,10 +30,32 @@ func main() {
 		break
 	case "save":
 		// handle save command
+		break
 	default:
+		fmt.Println("expected 'get' or 'save' command")
 	}
 }
 
-func handleGet(getCmd *flag.FlagSet, getAll *bool, getId *string) {
-	fmt.Println("I will handle get command")
+func handleGet(getCmd *flag.FlagSet, all *bool, id *string) {
+	getCmd.Parse(os.Args[2:])
+
+	if *all == false && *id == "" {
+		fmt.Println("Specify id or all to retrieve all videos")
+		getCmd.PrintDefaults()
+		os.Exit(1)
+	}
+
+	if *all {
+		videos := getVideos()
+		fmt.Println("Videos ")
+		fmt.Printf("ID \tVIDEO TITLE \tIMAGE PREVIEW \tVIDEO URL \tVIDEO DESCRIPTION \n")
+		for _, video := range videos {
+			fmt.Printf("%s \t%s \t%s \t%s \t%s \n", video.Id, video.Title, video.PreviewUrl, video.Url, video.Description)
+		}
+	}
+
+	if *id != "" {
+
+	}
+
 }
